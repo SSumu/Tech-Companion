@@ -1,1 +1,70 @@
-<p>analytics works!</p>
+<div class="analytics-page">
+  <h1>Analytics Dashboard</h1>
+
+  @if (loading) {
+    <div class="loading">Loading analytics...</div>
+  }
+
+  @if (error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @if (!loading && analytics) {
+    <!-- Stats Cards -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="title">Users</span>
+        <span class="value">{{ analytics.stats.totalUsers }}</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="title">Orders</span>
+        <span class="value">{{ analytics.stats.totalOrders }}</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="title">Revenue</span>
+        <span class="title">Rs. {{ analytics.stats.totalRevenue | number }}</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="title">Products</span>
+        <span class="value">{{ analytics.stats.totalProducts }}</span>
+      </div>
+    </section>
+
+    <!-- Revenue Chart -->
+    <section class="chart-section">
+      <h2>Revenue Trend</h2>
+
+      <div class="chart">
+        @for (item of analytics.revenueTrend; track item.date) {
+          <div class="chart-item">
+            <div class="bar revenue-bar" [style.height.px]="getRevenueBarHeight(item.value)"></div>
+
+            <span class="label">{{ item.date }}</span>
+
+            <span class="amount">{{ item.value }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Order Chart -->
+    <section class="chart-section">
+      <h2>Order Trend</h2>
+
+      <div class="chart">
+        @for (item of analytics.orderTrend; track item.date) {
+          <div class="chart-item">
+            <div class="bar order-bar" [style.height.px]="getOrderBarHeight(item.value)"></div>
+
+            <span class="label">{{ item.date }}</span>
+
+            <span class="amount">{{ item.value }}</span>
+          </div>
+        }
+      </div>
+    </section>
+  }
+</div>

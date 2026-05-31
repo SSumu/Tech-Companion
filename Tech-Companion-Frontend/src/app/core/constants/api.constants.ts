@@ -7,4 +7,5 @@ export const API_ENDPOINTS = {
   ORDERS: `${environment.apiUrl}/orders`,
   USERS: `${environment.apiUrl}/users`,
   ADMIN: `${environment.apiUrl}/admin`,
+  ANALYTICS: `${environment.apiUrl}/analytics`,
 };

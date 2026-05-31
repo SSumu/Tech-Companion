@@ -3,6 +3,10 @@ import { Routes } from '@angular/router';
 export const ADMIN_ROUTES: Routes = [
   { path: '', loadComponent: () => import('./dashboard/dashboard').then((m) => m.Dashboard) },
   {
+    path: 'analytics',
+    loadChildren: () => import('./analytics/analytics.routes').then((m) => m.ANALYTICS_ROUTES),
+  },
+  {
     path: 'products',
     loadComponent: () => import('./manage-products/manage-products').then((m) => m.ManageProducts),
   },
