@@ -1,3 +1,5 @@
+export type ProductAvailability = 'In Stock' | 'Out of Stock' | 'Coming Soon' | 'Pre Order';
+
 export interface Product {
   _id?: string;
   name: string;
@@ -7,5 +9,7 @@ export interface Product {
   price: number;
   quantity: number;
   image: string;
-  availability: 'In Stock' | 'Out of Stock' | 'Coming Soon' | 'Pre Order';
+  availability: ProductAvailability;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }

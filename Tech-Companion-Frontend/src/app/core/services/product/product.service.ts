@@ -29,4 +29,12 @@ export class ProductService {
   deleteProduct(id: string): Observable<any> {
     return this.http.delete(`${API_ENDPOINTS.PRODUCTS}/${id}`);
   }
+
+  getProductsByCategory(category: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${API_ENDPOINTS.PRODUCTS}/categories/${category}`);
+  }
+
+  searchProducts(keyword: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${API_ENDPOINTS.PRODUCTS}/search/${keyword}`);
+  }
 }

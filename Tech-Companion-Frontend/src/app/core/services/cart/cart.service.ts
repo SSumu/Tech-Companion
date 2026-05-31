@@ -1,23 +1,32 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
+import { HttpClient } from '@angular/common/http';
+import { API_ENDPOINTS } from '../../constants/api.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private cartItems = new BehaviorSubject<any[]>([]);
-  cart$ = this.cartItems.asObservable();
+  private http = inject(HttpClient);
 
-  addToCart(product: Product): void {
-    const items = this.cartItems.value;
-    items.push(product);
-    this.cartItems.next(items);
+  getCart(): Observable<any> {
+    return this.http.get(API_ENDPOINTS.CART);
   }
 
-  removeFromCart(index: number): void {
-    const items = this.cartItems.value;
-    items.splice(index, 1);
-    this.cartItems.next(items);
+  addToCart(productId: string, quantity: number): Observable<any> {
+    return this.http.post(`${API_ENDPOINTS.CART}/addToCart`, { productId, quantity });
+  }
+
+  updateCartItem(productId: string, quantity: number): Observable<any> {
+    return this.http.put(`${API_ENDPOINTS.CART}/updateCartItem`, { productId, quantity });
+  }
+
+  removeFromCart(productId: string): Observable<any> {
+    return this.http.delete(`${API_ENDPOINTS.CART}/removeCartItem/${productId}`);
+  }
+
+  clearCart(): Observable<any> {
+    return this.http.delete(`${API_ENDPOINTS.CART}/clearCart`);
   }
 }
