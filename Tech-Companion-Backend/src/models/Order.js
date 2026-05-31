@@ -15,6 +15,8 @@ const orderSchema = new mongoose.Schema(
       enum: ["Pending", "Processing", "Delivered", "Cancelled"],
       default: "Pending",
     },
+    totalAmount: Number,
+    createdAt: Date,
   },
   { timestamps: true },
 );

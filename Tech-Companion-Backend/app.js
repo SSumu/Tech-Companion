@@ -9,6 +9,7 @@ import cartRoutes from "./src/routes/cartRoutes.js";
 import orderRoutes from "./src/routes/orderRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import adminRoutes from "./src/routes/adminRoutes.js";
+import analyticsRoutes from "./src/routes/analyticsRoutes.js";
 import { requestLogger } from "./src/utils/logger.js";
 
 const app = express();
@@ -36,6 +37,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
